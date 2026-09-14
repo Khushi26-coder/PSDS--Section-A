@@ -1,0 +1,60 @@
+# -------------------------------
+# Q1: 3 Sum Problem
+# -------------------------------
+print("----- 3 SUM OUTPUT -----")
+
+nums = [5, 6, -3, 8, 1, 9, 2]
+nums.sort()
+
+for i in range(len(nums) - 2):
+    left = i + 1
+    right = len(nums) - 1
+
+    while left < right:
+        total = nums[i] + nums[left] + nums[right]
+
+        if total == 0:
+            print(nums[i], nums[left], nums[right])
+            left += 1
+            right -= 1
+
+        elif total < 0:
+            left += 1
+        else:
+            right -= 1
+
+
+# -------------------------------
+# Fibonacci Series
+# -------------------------------
+print("\n----- FIBONACCI OUTPUT -----")
+
+n = int(input("Enter number of terms: "))
+
+a = 1
+b = 1
+
+for i in range(n):
+    print(a, end=" ")
+    c = a + b
+    a = b
+    b = c
+
+
+# -------------------------------
+# Tower of Hanoi
+# -------------------------------
+print("\n\n----- TOWER OF HANOI OUTPUT -----")
+
+def tower(n, source, helper, destination):
+    if n == 1:
+        print("Move disk from", source, "to", destination)
+        return
+
+    tower(n - 1, source, destination, helper)
+    print("Move disk from", source, "to", destination)
+    tower(n - 1, helper, source, destination)
+
+
+# calling function
+tower(3, 'A', 'B', 'C')
