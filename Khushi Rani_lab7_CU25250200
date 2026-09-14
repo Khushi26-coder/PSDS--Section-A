@@ -1,0 +1,69 @@
+import heapq
+
+print("LABSHEET 7\n")
+
+# ---------------- Problem 1 ----------------
+print("Problem 1 Output:")
+
+arr = [5, 3, 8, 1, 2]
+
+# Heap (Min Heap)
+heap = arr.copy()
+heapq.heapify(heap)
+print("Min Heap:", heap)
+
+# Priority Queue (Insert + Delete)
+heapq.heappush(heap, 0)
+removed = heapq.heappop(heap)
+print("Priority Queue -> Deleted Element:", removed)
+
+# Heap Sort
+def heap_sort(a):
+    heapq.heapify(a)
+    return [heapq.heappop(a) for _ in range(len(a))]
+
+print("Heap Sort Result:", heap_sort(arr.copy()))
+
+
+# ---------------- Problem 2 ----------------
+print("\nProblem 2 Output:")
+
+arr = [4, 2, 7, 1]
+arr.sort()
+
+result = []
+i, j = 0, len(arr) - 1
+
+while i <= j:
+    if i != j:
+        result.append(arr[i])
+        result.append(arr[j])
+    else:
+        result.append(arr[i])
+    i += 1
+    j -= 1
+
+total = sum(abs(result[k] - result[k+1]) for k in range(len(result)-1))
+
+print("Rearranged Array:", result)
+print("Max Sum:", total)
+
+
+# ---------------- Problem 3 ----------------
+print("\nProblem 3 Output:")
+
+arr = [2, 1, 5, 2, 3, 2]
+target = 7
+
+left = 0
+current_sum = 0
+min_len = float('inf')
+
+for right in range(len(arr)):
+    current_sum += arr[right]
+    while current_sum > target:
+        min_len = min(min_len, right - left + 1)
+        current_sum -= arr[left]
+        left += 1
+
+print("Smallest Subarray Length:", min_len if min_len != float('inf') else -1)
