@@ -1,0 +1,13 @@
+#labsheet 10 A
+
+def solve():
+   N=int(input()) 
+   nums=list(map(int,input().split()))
+   count={}
+   ans=0
+   for i in nums:
+      digit_sum=sum(map(int,str(i)))
+      ans+=count.get(digit_sum,0)
+      count[digit_sum]=count.get(digit_sum,0) + 1
+   print(ans)
+solve()
