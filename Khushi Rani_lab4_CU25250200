@@ -1,0 +1,101 @@
+--  LAB 4 
+-- Experiment: Design Database Schema
+-- Problem Statement: College Database
+
+-- 1. CREATE DEPARTMENT TABLE
+
+CREATE TABLE Department (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50) NOT NULL
+);
+
+-- 2. CREATE STUDENT TABLE
+
+CREATE TABLE Student (
+    student_id INT PRIMARY KEY,
+    student_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    dept_id INT,
+
+    CONSTRAINT fk_student_department
+    FOREIGN KEY (dept_id)
+    REFERENCES Department(dept_id)
+);
+
+-- 3. CREATE COURSE TABLE
+
+CREATE TABLE Course (
+    course_id INT PRIMARY KEY,
+    course_name VARCHAR(100) NOT NULL,
+    credits INT NOT NULL,
+    dept_id INT,
+
+    CONSTRAINT fk_course_department
+    FOREIGN KEY (dept_id)
+    REFERENCES Department(dept_id)
+);
+
+-- 4. INSERT DATA INTO DEPARTMENT
+
+INSERT INTO Department (dept_id, dept_name)
+VALUES
+(1, 'Computer Science'),
+(2, 'Information Technology'),
+(3, 'Technical');
+
+-- 5. INSERT DATA INTO STUDENT
+
+
+INSERT INTO Student
+(student_id, student_name, email, dept_id)
+VALUES
+(101, 'Rahul', 'rahul@gmail.com', 1),
+(102, 'Priya', 'priya@gmail.com', 2),
+(103, 'Aman', 'aman@gmail.com', 1),
+(104, 'Neha', 'neha@gmail.com', 3);
+
+-- 6. INSERT DATA INTO COURSE
+
+INSERT INTO Course
+(course_id, course_name, credits, dept_id)
+VALUES
+(201, 'Database Management System', 4, 1),
+(202, 'Python Programming', 3, 1),
+(203, 'Web Technology', 4, 2),
+(204, 'Technical lab', 3, 3);
+
+-- 7. DISPLAY DEPARTMENT TABLE
+
+SELECT * FROM Department;
+
+-- 8. DISPLAY STUDENT TABLE
+
+
+SELECT * FROM Student;
+
+-- 9. DISPLAY COURSE TABLE
+
+SELECT * FROM Course;
+
+-- 10. DISPLAY STUDENTS WITH THEIR DEPARTMENT
+
+SELECT
+    Student.student_id,
+    Student.student_name,
+    Student.email,
+    Department.dept_name
+FROM Student
+INNER JOIN Department
+ON Student.dept_id = Department.dept_id;
+
+
+-- 11. DISPLAY COURSES WITH THEIR DEPARTMENT
+
+SELECT
+    Course.course_id,
+    Course.course_name,
+    Course.credits,
+    Department.dept_name
+FROM Course
+INNER JOIN Department
+ON Course.dept_id = Department.dept_id;
